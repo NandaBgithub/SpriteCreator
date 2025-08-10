@@ -1,4 +1,4 @@
-# Sprire creator
+# Sprite creator
 
 - Inspired by the sprite creator from Eloquent Javascript, figured  I'd make my own version of it
 with clearer code.
