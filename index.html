@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1 class="header-title">Pixel Edit</h1>
+
+    <div class="control-panel">
+        <div>
+            <label for="color-picker">Color Picker</label>
+            <input id="color-picker" type="color" name="Color Picker" value="#030303" />
+        </div>
+
+        <div>
+            <label for="tool-select">Select Tool</label>
+            <select name="tool-sector" id="tool-select">
+                <option value="draw">Draw</option>
+                <option value="eraser">Eraser</option>
+            </select>
+        </div>
+
+        <button id="save">Save</button>
+        <button id="load">Load</button>
+    </div>
+
+    <script type="module" src="./ToolEnum.js"></script>
+    <script type="module" src="./StateManager.js"></script>
+    <script type="module" src="./Utils.js"></script>
+    <script type="module" src="./DrawingCanvas.js"></script>
+    <script type="module" src="./MainProgram.js"></script>
+</body>
+</html>
