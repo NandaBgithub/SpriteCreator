@@ -1,8 +1,13 @@
 # Sprite creator
 
-- Inspired by the sprite creator from Eloquent Javascript, figured  I'd make my own version of it
-with clearer code.
+- Inspired by the sprite creator from Eloquent Javascript, figured  I'd make it my own way. For now only 400 by 400 pixel sprites can be drawn, loaded and saved. Sprite sheets can be formed by merging sprites first by row, then by column.
 
-Pretty useful if anytime I need to make spritesheets, but more features can be added, like layering and a new widow to merge an array of sprite sheets vertically and horizontally.
+Pretty useful if anytime I need to make spritesheets.
 
-![alt text](Capture.JPG)
+Features one can add to extend it:
+
+1. Adjustable canvas sizes according to UI.
+2. Canvas size dynamically adjust when image loads.
+3. Allow for merging uneven sized and asymmetrical sprite sheets by row and column.
+
+![alt-text](img.JPG)

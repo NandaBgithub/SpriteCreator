@@ -70,3 +70,71 @@ loadbtn.onclick = () => {
     
     input.click();
 };
+
+// Merge maximum 4 in one row or column for now
+// Create an invisible canvas for merging only
+let mergeRow = document.querySelector("#merge-row");
+mergeRow.addEventListener('click', (event) => {
+    let mergeCanvas = document.createElement("canvas");
+    let canvasContext = mergeCanvas.getContext("2d");
+    merge('row', mergeCanvas, canvasContext, canvasRef);
+});
+
+let mergeCol = document.querySelector("#merge-col");
+mergeCol.addEventListener('click', (event) => {
+    let mergeCanvas = document.createElement("canvas");
+    let canvasContext = mergeCanvas.getContext("2d");
+    merge('col', mergeCanvas, canvasContext, canvasRef);
+})
+
+function merge(mode, canvas, context, mainCanvas){
+    if (mode === "row"){canvas.height = 400;}
+
+    let input = document.createElement('input');
+    input.multiple = true;
+    input.type = 'file';
+    input.accept = 'image/png';
+
+    input.onchange = (event) => {
+        let numFiles = input.files.length;
+        let fileList = input.files;
+        let imgList = [];
+
+        console.log(numFiles);
+        let imagePromises = Array.from(fileList).map(file => {
+            return new Promise((resolve) => {
+                let img = new Image();
+                img.src = URL.createObjectURL(file);
+                img.onload = () => resolve(img);
+            });
+        });
+
+        Promise.all(imagePromises).then(imgList => {
+            for (let i = 0; i<imgList.length; i++){
+                if (mode == "row"){
+                    canvas.width += imgList[i].width;
+                } else {canvas.height += imgList[i].width;}
+            }
+            
+            for(let i = 0; i<imgList.length; i++){
+                if (mode == "col"){
+                    context.drawImage(imgList[i], 0, mainCanvas.width * i, mainCanvas.width, mainCanvas.width);
+                } else {
+                    context.drawImage(imgList[i], mainCanvas.width * i,0, mainCanvas.width, mainCanvas.width);
+                }
+                
+            }
+            
+            const link = document.createElement("a");
+            link.download = "canvas-merged.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+            return new Promise((resolve) => {
+                resolve(imgList);
+            })
+        }).then((imgList) => {console.log(imgList)});
+        
+    };
+
+    input.click();
+}
